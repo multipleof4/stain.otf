@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import opentype from "opentype.js";
-import { buildGlyph, METRICS } from "../src/glyphs.js";
+import { buildGlyph, METRICS, SUPPORTED_CHARS } from "../src/glyphs.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -11,14 +11,6 @@ if (!fs.existsSync(distDir)) fs.mkdirSync(distDir, { recursive: true });
 
 const FAMILY = "Stain";
 const STYLE = "Regular";
-
-const charset = [
-  " ",
-  "A","B","C","D","E","F","G","H","I","J","K","L","M",
-  "N","O","P","Q","R","S","T","U","V","W","X","Y","Z",
-  "0","1","2","3","4","5","6","7","8","9",
-  ".",",",":",";","!","?","-","–","—","@"
-];
 
 function buildNotdef() {
   const w = 600;
@@ -55,7 +47,7 @@ function createGlyph(ch) {
 
 function buildFont() {
   const glyphs = [buildNotdef()];
-  charset.forEach(ch => glyphs.push(createGlyph(ch)));
+  SUPPORTED_CHARS.forEach(ch => glyphs.push(createGlyph(ch)));
 
   const font = new opentype.Font({
     familyName: FAMILY,
