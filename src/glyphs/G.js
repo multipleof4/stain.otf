@@ -40,25 +40,31 @@ export const glyphg=(opentype,adv)=>
     "g",
     "g".codePointAt(0),
     p=>{
-      p.moveTo(290,-10);
-      p.curveTo(240,-10,200,10,170,40);
-      p.lineTo(170,0);
-      p.lineTo(110,0);
-      p.lineTo(110,480);
-      p.lineTo(170,480);
-      p.lineTo(170,360);
-      p.curveTo(200,390,240,410,290,410);
-      p.curveTo(410,410,490,330,490,200);
-      p.lineTo(490,120);
-      p.curveTo(490,-30,410,-110,280,-110);
-      p.curveTo(180,-110,110,-60,80,20);
-      p.lineTo(140,50);
-      p.curveTo(160,-10,210,-50,280,-50);
-      p.curveTo(370,-50,430,-5,430,120);
-      p.lineTo(430,200);
-      p.curveTo(430,290,370,350,290,350);
-      p.curveTo(210,350,170,290,170,200);
-      p.curveTo(170,110,210,50,290,50);
+      // lower bowl (main counter)
+      p.moveTo(310,-10);
+      p.curveTo(190,-10,100,80,100,230);
+      p.curveTo(100,380,190,470,310,470);
+      p.curveTo(430,470,520,380,520,230);
+      p.curveTo(520,80,430,-10,310,-10);
+      p.close();
+      // inner counter
+      p.moveTo(310,50);
+      p.curveTo(400,50,460,110,460,230);
+      p.curveTo(460,350,400,410,310,410);
+      p.curveTo(220,410,160,350,160,230);
+      p.curveTo(160,110,220,50,310,50);
+      p.close();
+      // stem + ear: descender and top terminal
+      p.moveTo(430,470);
+      p.curveTo(430,560,390,600,320,600);
+      p.curveTo(280,600,250,590,220,570);
+      p.lineTo(200,620);
+      p.curveTo(240,645,280,660,330,660);
+      p.curveTo(430,660,490,600,490,480);
+      p.lineTo(490,-150);
+      p.lineTo(430,-150);
+      p.lineTo(430,40);
+      p.curveTo(400,10,360,-10,310,-10);
       p.close();
       return p;
     },
