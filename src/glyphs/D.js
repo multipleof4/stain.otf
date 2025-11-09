@@ -37,23 +37,22 @@ export const glyphd=(opentype,adv)=>
     "d",
     "d".codePointAt(0),
     p=>{
-      const stemX=460;
-      const asc=720;
-      p.moveTo(300,-10);
-      p.curveTo(180,-10,90,80,90,240);
-      p.curveTo(90,400,180,490,300,490);
-      p.curveTo(380,490,440,460,480,410);
-      p.lineTo(480,asc);
-      p.lineTo(420,asc);
-      p.lineTo(420,450);
-      p.curveTo(390,480,350,490,300,490);
-      p.curveTo(180,490,90,400,90,240);
-      p.curveTo(90,80,180,-10,300,-10);
-      p.curveTo(360,-10,410,10,450,40);
-      p.lineTo(450,0);
-      p.lineTo(510,0);
-      p.lineTo(510,410);
-      p.curveTo(510,260,430,50,300,50);
+      p.moveTo(310,-10);
+      p.curveTo(250,-10,200,10,160,40);
+      p.lineTo(160,0);
+      p.lineTo(100,0);
+      p.lineTo(100,720);
+      p.lineTo(160,720);
+      p.lineTo(160,440);
+      p.curveTo(200,470,250,490,310,490);
+      p.curveTo(430,490,520,400,520,240);
+      p.curveTo(520,80,430,-10,310,-10);
+      p.close();
+      p.moveTo(310,50);
+      p.curveTo(400,50,460,110,460,240);
+      p.curveTo(460,370,400,430,310,430);
+      p.curveTo(220,430,160,370,160,240);
+      p.curveTo(160,110,220,50,310,50);
       p.close();
       return p;
     },
