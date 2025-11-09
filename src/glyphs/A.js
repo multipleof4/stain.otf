@@ -36,26 +36,17 @@ export const glypha = (opentype, adv) =>
     "a",
     "a".codePointAt(0),
     (p) => {
-      p.moveTo(340, -10);
-      p.curveTo(240, -10, 160, 30, 120, 100);
-      p.lineTo(170, 130);
-      p.curveTo(200, 80, 260, 50, 330, 50);
-      p.curveTo(420, 50, 480, 100, 480, 180);
-      p.lineTo(480, 220);
-      p.curveTo(450, 180, 400, 150, 330, 150);
-      p.curveTo(220, 150, 140, 220, 140, 320);
-      p.curveTo(140, 420, 220, 490, 330, 490);
-      p.curveTo(400, 490, 450, 460, 480, 420);
-      p.lineTo(480, 480);
-      p.lineTo(540, 480);
-      p.lineTo(540, 180);
-      p.curveTo(540, 70, 460, -10, 340, -10);
+      p.moveTo(510, 0);
+      p.lineTo(510, 480);
+      p.lineTo(300, 480);
+      p.curveTo(180, 480, 90, 380, 90, 240);
+      p.curveTo(90, 100, 180, 0, 300, 0);
       p.close();
-      p.moveTo(330, 210);
-      p.curveTo(410, 210, 480, 250, 480, 320);
-      p.curveTo(480, 390, 410, 430, 330, 430);
-      p.curveTo(250, 430, 200, 380, 200, 320);
-      p.curveTo(200, 260, 250, 210, 330, 210);
+      p.moveTo(300, 60);
+      p.curveTo(210, 60, 150, 130, 150, 240);
+      p.curveTo(150, 350, 210, 420, 300, 420);
+      p.lineTo(450, 420);
+      p.lineTo(450, 60);
       p.close();
       return p;
     },
