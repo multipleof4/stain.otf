@@ -40,10 +40,10 @@ const styleName="Regular";
 const unitsPerEm=1000;
 const ascender=800;
 const descender=-200;
-const defaultAdv=580;      // slightly tighter default
-const wideAdv=700;         // for M / W / m / w
-const spaceAdv=240;        // slightly tighter space
-const periodAdv=220;       // slightly tighter period
+const defaultAdv=580;   // slightly tighter default
+const wideAdv=700;      // for M/W/m/w
+const spaceAdv=240;     // tighter space
+const periodAdv=220;    // tighter period
 
 const mkGlyph=(name,unicode,adv,pathFn)=>
   new opentype.Glyph({
@@ -53,7 +53,12 @@ const mkGlyph=(name,unicode,adv,pathFn)=>
     path:pathFn(new opentype.Path())
   });
 
-const glyphSpace=mkGlyph("space"," ".codePointAt(0),spaceAdv,p=>p);
+const glyphSpace=mkGlyph(
+  "space",
+  " ".codePointAt(0),
+  spaceAdv,
+  p=>p
+);
 
 const glyphPeriod=mkGlyph(
   "period",
@@ -62,8 +67,8 @@ const glyphPeriod=mkGlyph(
   p=>{
     const x=80,w=70,h=120;
     p.moveTo(x,0);
-    p.lineTo(x, h);
-    p.lineTo(x+w, h);
+    p.lineTo(x,h);
+    p.lineTo(x+w,h);
     p.lineTo(x+w,0);
     p.close();
     return p;
@@ -137,7 +142,7 @@ const font=new opentype.Font({
   copyright:"Author: Anon. License: CC0 1.0 Universal."
 });
 
-// basic kerning pairs to reduce obvious gaps
+// basic kerning pairs (GPOS-based; opentype.js expects glyph indices)
 const kernPairs=[
   ["A","V",-70],
   ["A","W",-70],
@@ -185,23 +190,113 @@ const kernPairs=[
   ["K","o",-40],
   ["K","e",-35],
   ["K","u",-35],
-  [" ","A",-20],
-  [" ","V",-15],
-  [" ","W",-15],
-  [" ","Y",-15]
+  ["space","A",-20],
+  ["space","V",-15],
+  ["space","W",-15],
+  ["space","Y",-15]
 ];
 
-const glyphIndexByName=name=>{
-  const g=font.glyphs.glyphs.find(gl=>gl.name===name);
-  return g?g.index:0;
+const nameToIndex=name=>font.glyphs.glyphIndex({name});
+
+const pairsByScriptLang={
+  DFLT:{
+    dflt:kernPairs
+  },
+  latn:{
+    dflt:kernPairs
+  }
 };
 
-font.kerningPairs=kernPairs.reduce((acc,[l,r,v])=>{
-  const left=glyphIndexByName(l);
-  const right=glyphIndexByName(r);
-  if(left && right) acc[`${left},${right}`]=v;
-  return acc;
-},{});
+const lookups=[];
+const features=[];
+let lookupIndex=0;
+
+for(const [script,tags] of Object.entries(pairsByScriptLang)){
+  for(const [lang,entries] of Object.entries(tags)){
+    const subTable={
+      posFormat:1,
+      coverage:{ format:1, glyphs:[] },
+      pairSets:[]
+    };
+    const leftMap=new Map();
+
+    for(const [lName,rName,val] of entries){
+      const lIdx=nameToIndex(lName);
+      const rIdx=nameToIndex(rName);
+      if(lIdx<=0 || rIdx<=0 || !val)continue;
+      if(!leftMap.has(lIdx))leftMap.set(lIdx,[]);
+      leftMap.get(lIdx).push({ rIdx, val });
+    }
+
+    if(leftMap.size===0)continue;
+
+    const coverageGlyphs=[];
+    const pairSets=[];
+    for(const [lIdx,items] of leftMap.entries()){
+      coverageGlyphs.push(lIdx);
+      pairSets.push({
+        pairValueRecords:items.map(i=>({
+          secondGlyph:i.rIdx,
+          value1:{ xAdvance:i.val },
+          value2:{}
+        }))
+      });
+    }
+
+    subTable.coverage.glyphs=coverageGlyphs;
+    subTable.pairSets=pairSets;
+
+    const lookup={
+      lookupType:2,
+      lookupFlag:0,
+      subtables:[subTable]
+    };
+
+    const feature={
+      tag:"kern",
+      lookupListIndexes:[lookupIndex]
+    };
+
+    lookups.push(lookup);
+    features.push({ script, lang, feature });
+    lookupIndex++;
+  }
+}
+
+if(lookups.length){
+  font.tables.gpos={
+    version:1,
+    scripts:[],
+    features:[],
+    lookups
+  };
+
+  const scriptMap=new Map();
+
+  for(const {script,lang,feature} of features){
+    if(!scriptMap.has(script))scriptMap.set(script,{ tag:script, script:{ defaultLangSys:{ featureIndexes:[], lookupOrder:null, reqFeatureIndex:0xffff }, langSysRecords:[] } });
+    const rec=scriptMap.get(script);
+    const scriptObj=rec.script;
+
+    const featureIndex=font.tables.gpos.features.length;
+    font.tables.gpos.features.push(feature);
+
+    if(lang==="dflt"){
+      scriptObj.defaultLangSys.featureIndexes.push(featureIndex);
+    }else{
+      scriptObj.langSysRecords.push({
+        tag:lang,
+        langSys:{
+          lookupOrder:null,
+          reqFeatureIndex:0xffff,
+          featureIndexes:[featureIndex]
+        }
+      });
+    }
+  }
+
+  font.tables.gpos.scripts=[...scriptMap.values()];
+}
 
 const buf=Buffer.from(font.toArrayBuffer());
 const outPath=path.join(outDir,"Stain.otf");
