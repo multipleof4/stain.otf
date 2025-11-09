@@ -40,7 +40,10 @@ const styleName="Regular";
 const unitsPerEm=1000;
 const ascender=800;
 const descender=-200;
-const defaultAdv=600;
+const defaultAdv=580;      // slightly tighter default
+const wideAdv=700;         // for M / W / m / w
+const spaceAdv=240;        // slightly tighter space
+const periodAdv=220;       // slightly tighter period
 
 const mkGlyph=(name,unicode,adv,pathFn)=>
   new opentype.Glyph({
@@ -50,16 +53,18 @@ const mkGlyph=(name,unicode,adv,pathFn)=>
     path:pathFn(new opentype.Path())
   });
 
-const glyphSpace=mkGlyph("space"," ".codePointAt(0),260,p=>p);
+const glyphSpace=mkGlyph("space"," ".codePointAt(0),spaceAdv,p=>p);
+
 const glyphPeriod=mkGlyph(
   "period",
   ".".codePointAt(0),
-  260,
+  periodAdv,
   p=>{
-    p.moveTo(80,0);
-    p.lineTo(80,120);
-    p.lineTo(180,120);
-    p.lineTo(180,0);
+    const x=80,w=70,h=120;
+    p.moveTo(x,0);
+    p.lineTo(x, h);
+    p.lineTo(x+w, h);
+    p.lineTo(x+w,0);
     p.close();
     return p;
   }
@@ -92,8 +97,8 @@ const glyphList=[
   glyphk(opentype,defaultAdv),
   glyphL(opentype,defaultAdv),
   glyphl(opentype,defaultAdv),
-  glyphM(opentype,740),
-  glyphm(opentype,740),
+  glyphM(opentype,wideAdv),
+  glyphm(opentype,wideAdv),
   glyphN(opentype,defaultAdv),
   glyphn(opentype,defaultAdv),
   glyphO(opentype,defaultAdv),
@@ -112,8 +117,8 @@ const glyphList=[
   glyphu(opentype,defaultAdv),
   glyphV(opentype,defaultAdv),
   glyphv(opentype,defaultAdv),
-  glyphW(opentype,760),
-  glyphw(opentype,660),
+  glyphW(opentype,wideAdv),
+  glyphw(opentype,wideAdv-40),
   glyphX(opentype,defaultAdv),
   glyphx(opentype,defaultAdv),
   glyphY(opentype,defaultAdv),
@@ -131,6 +136,72 @@ const font=new opentype.Font({
   glyphs:glyphList,
   copyright:"Author: Anon. License: CC0 1.0 Universal."
 });
+
+// basic kerning pairs to reduce obvious gaps
+const kernPairs=[
+  ["A","V",-70],
+  ["A","W",-70],
+  ["A","Y",-70],
+  ["A","T",-50],
+  ["A","O",-25],
+  ["A","Q",-25],
+  ["V","A",-70],
+  ["V","O",-40],
+  ["V","a",-50],
+  ["V","o",-50],
+  ["V","e",-45],
+  ["V","u",-40],
+  ["W","A",-70],
+  ["W","O",-40],
+  ["W","a",-50],
+  ["W","o",-50],
+  ["W","e",-45],
+  ["W","u",-40],
+  ["Y","A",-80],
+  ["Y","O",-40],
+  ["Y","a",-70],
+  ["Y","o",-70],
+  ["Y","e",-65],
+  ["Y","u",-55],
+  ["T","A",-60],
+  ["T","O",-40],
+  ["T","a",-70],
+  ["T","o",-70],
+  ["T","e",-65],
+  ["T","u",-60],
+  ["T","y",-50],
+  ["L","T",-50],
+  ["L","V",-70],
+  ["L","W",-70],
+  ["L","Y",-80],
+  ["F","a",-45],
+  ["F","o",-45],
+  ["F","e",-40],
+  ["P","A",-70],
+  ["P","a",-40],
+  ["P","o",-40],
+  ["K","O",-40],
+  ["K","a",-40],
+  ["K","o",-40],
+  ["K","e",-35],
+  ["K","u",-35],
+  [" ","A",-20],
+  [" ","V",-15],
+  [" ","W",-15],
+  [" ","Y",-15]
+];
+
+const glyphIndexByName=name=>{
+  const g=font.glyphs.glyphs.find(gl=>gl.name===name);
+  return g?g.index:0;
+};
+
+font.kerningPairs=kernPairs.reduce((acc,[l,r,v])=>{
+  const left=glyphIndexByName(l);
+  const right=glyphIndexByName(r);
+  if(left && right) acc[`${left},${right}`]=v;
+  return acc;
+},{});
 
 const buf=Buffer.from(font.toArrayBuffer());
 const outPath=path.join(outDir,"Stain.otf");
