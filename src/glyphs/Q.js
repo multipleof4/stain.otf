@@ -1,62 +1,61 @@
-const makeGlyph = (opentype, name, unicode, cmds, adv) =>
-  new opentype.Glyph({
-    name,
-    unicode,
-    advanceWidth: adv,
-    path: cmds(new opentype.Path())
-  });
+const makeGlyph=(opentype,name,unicode,cmds,adv)=>
+  new opentype.Glyph({name,unicode,advanceWidth:adv,path:cmds(new opentype.Path())});
 
-export const glyphQ = (opentype, adv) =>
+export const glyphQ=(opentype,adv)=>
   makeGlyph(
     opentype,
     "Q",
     "Q".codePointAt(0),
-    (p) => {
-      p.moveTo(300, -10);
-      p.curveTo(160, -10, 60, 100, 60, 280);
-      p.lineTo(60, 420);
-      p.curveTo(60, 600, 160, 710, 300, 710);
-      p.curveTo(440, 710, 540, 600, 540, 420);
-      p.lineTo(540, 280);
-      p.curveTo(540, 140, 470, 40, 360, 10);
-      p.lineTo(480, -80);
-      p.lineTo(440, -120);
-      p.lineTo(300, 0);
-      p.curveTo(290, 0, 280, 0, 270, 0);
-      p.lineTo(270, 60);
-      p.curveTo(280, 60, 290, 60, 300, 60);
-      p.lineTo(340, 60);
-      p.lineTo(380, 20);
-      p.curveTo(450, 50, 480, 140, 480, 280);
-      p.lineTo(480, 420);
-      p.curveTo(480, 570, 410, 650, 300, 650);
-      p.curveTo(190, 650, 120, 570, 120, 420);
-      p.lineTo(120, 280);
-      p.curveTo(120, 130, 190, 50, 300, 50);
+    p=>{
+      const cx=300,cy=310,ro=260,ri=190;
+      p.moveTo(cx,cy-ro);
+      p.curveTo(cx-160,cy-ro,cx-ro,cy-160,cx-ro,cy);
+      p.curveTo(cx-ro,cy+160,cx-160,cy+ro,cx,cy+ro);
+      p.curveTo(cx+160,cy+ro,cx+ro,cy+160,cx+ro,cy);
+      p.curveTo(cx+ro,cy-60,cx+210,cy-150,cx+140,cy-210);
+      p.lineTo(cx+220,cy-260);
+      p.lineTo(cx+260,cy-220);
+      p.lineTo(cx+190,cy-180);
+      p.curveTo(cx+260,cy-120,cx+ro,cy-40,cx+ro,cy);
+      p.curveTo(cx+ro,cy+160,cx+160,cy+ro,cx,cy+ro);
+      p.curveTo(cx-160,cy+ro,cx-ro,cy+160,cx-ro,cy);
+      p.curveTo(cx-ro,cy-160,cx-160,cy-ro,cx,cy-ro);
+      p.close();
+      p.moveTo(cx,cy-ri);
+      p.curveTo(cx-120,cy-ri,cx-ri,cy-120,cx-ri,cy);
+      p.curveTo(cx-ri,cy+120,cx-120,cy+ri,cx,cy+ri);
+      p.curveTo(cx+120,cy+ri,cx+ri,cy+120,cx+ri,cy);
+      p.curveTo(cx+ri,cy-120,cx+120,cy-ri,cx,cy-ri);
       p.close();
       return p;
     },
     adv
   );
 
-export const glyphq = (opentype, adv) =>
+export const glyphq=(opentype,adv)=>
   makeGlyph(
     opentype,
     "q",
     "q".codePointAt(0),
-    (p) => {
-      p.moveTo(500, -150);
-      p.lineTo(500, 480);
-      p.lineTo(290, 480);
-      p.curveTo(150, 480, 80, 380, 80, 240);
-      p.curveTo(80, 100, 150, 0, 290, 0);
-      p.lineTo(500, 0);
+    p=>{
+      const cx=300,base=-10;
+      p.moveTo(cx,base-40);
+      p.curveTo(cx-120,base-40,210,50,210,210);
+      p.curveTo(210,370,cx-120,460,cx,460);
+      p.curveTo(cx+80,460,350,430,390,380);
+      p.lineTo390=390;
+      p.lineTo(390,480);
+      p.lineTo(450,480);
+      p.lineTo(450,-150);
+      p.lineTo(390,-150);
+      p.lineTo(390,0);
+      p.curveTo(360,-30,330,base-40,cx,base-40);
       p.close();
-      p.moveTo(290, 60);
-      p.curveTo(180, 60, 140, 130, 140, 240);
-      p.curveTo(140, 350, 180, 420, 290, 420);
-      p.lineTo(440, 420);
-      p.lineTo(440, 60);
+      p.moveTo(cx,20);
+      p.curveTo(cx+90,20,330,110,330,210);
+      p.curveTo(330,310,cx+90,400,cx,400);
+      p.curveTo(cx-90,400,270,310,270,210);
+      p.curveTo(270,110,cx-90,20,cx,20);
       p.close();
       return p;
     },
