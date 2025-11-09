@@ -32,26 +32,27 @@ export const glypha=(opentype,adv)=>
     "a",
     "a".codePointAt(0),
     p=>{
-      const cx=310,cy=245;
-      const rO=175,rI=115;
-      const stemX=cx+150;
-      const asc=480;
-      p.moveTo(cx+rO,cy);
-      p.curveTo(cx+rO,cy+96,cx+96,cy+rO,cx,cy+rO);
-      p.curveTo(cx-96,cy+rO,cx-rO,cy+96,cx-rO,cy);
-      p.curveTo(cx-rO,cy-96,cx-96,cy-rO,cx,cy-rO);
-      p.curveTo(cx+96,cy-rO,cx+rO,cy-96,cx+rO,cy);
+      p.moveTo(310,-10);
+      p.curveTo(210,-10,130,50,110,140);
+      p.lineTo(170,160);
+      p.curveTo(185,95,235,50,310,50);
+      p.curveTo(390,50,440,100,440,180);
+      p.lineTo(440,220);
+      p.lineTo(300,220);
+      p.curveTo(180,220,100,270,100,360);
+      p.curveTo(100,450,180,490,280,490);
+      p.curveTo(340,490,390,470,430,430);
+      p.lineTo(430,480);
+      p.lineTo(490,480);
+      p.lineTo(490,180);
+      p.curveTo(490,70,410,-10,310,-10);
       p.close();
-      p.moveTo(cx+rI,cy);
-      p.curveTo(cx+rI,cy+64,cx+64,cy+rI,cx,cy+rI);
-      p.curveTo(cx-64,cy+rI,cx-rI,cy+64,cx-rI,cy);
-      p.curveTo(cx-rI,cy-64,cx-64,cy-rI,cx,cy-rI);
-      p.curveTo(cx+64,cy-rI,cx+rI,cy-64,cx+rI,cy);
-      p.close();
-      p.moveTo(stemX-40,-10);
-      p.lineTo(stemX+40,-10);
-      p.lineTo(stemX+40,asc);
-      p.lineTo(stemX-40,asc);
+      p.moveTo(280,430);
+      p.curveTo(210,430,160,400,160,350);
+      p.curveTo(160,300,210,270,300,270);
+      p.lineTo(440,270);
+      p.lineTo(440,310);
+      p.curveTo(440,380,370,430,280,430);
       p.close();
       return p;
     },
