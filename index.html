@@ -1,1 +1,105 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>StainFont Preview</title>
+<style>
+body {
+  margin: 0;
+  padding: 2rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #050505;
+  color: #f5f5f5;
+}
+h1 {
+  margin: 0 0 1rem;
+  font-weight: 600;
+}
+label {
+  display: block;
+  margin: 1rem 0 0.5rem;
+}
+textarea {
+  width: 100%;
+  max-width: 720px;
+  height: 120px;
+  padding: 0.75rem;
+  border-radius: 4px;
+  border: 1px solid #333;
+  background: #111;
+  color: #f5f5f5;
+  resize: vertical;
+  font-size: 1rem;
+}
+.preview {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  max-width: 720px;
+  border-radius: 4px;
+  background: #111;
+  border: 1px solid #333;
+  font-size: 2.25rem;
+  line-height: 1.25;
+}
+.controls {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+button {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  background: #f5f5f5;
+  color: #000;
+  font-size: 0.9rem;
+}
+button:hover {
+  background: #ddd;
+}
+.small {
+  font-size: 0.75rem;
+  opacity: 0.75;
+}
+@font-face {
+  font-family: "StainFont Basic";
+  src: url("./dist/StainFont-Basic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+.preview.stain {
+  font-family: "StainFont Basic", system-ui, sans-serif;
+}
+</style>
+</head>
+<body>
+<h1>StainFont Basic Preview</h1>
+<div class="small">
+  This is a generated test font. The AI-driven glyph design will plug into the build script.
+</div>
+<label for="text">Preview text</label>
+<textarea id="text">STAIN FONT – AI DESIGNED. 0123456789 !?@#</textarea>
+<div class="controls">
+  <button id="useSystem">Use system font</button>
+  <button id="useStain">Use StainFont Basic</button>
+  <a href="./dist/StainFont-Basic.ttf" download="StainFont-Basic.ttf">
+    <button type="button">Download TTF</button>
+  </a>
+</div>
+<div class="preview stain" id="preview">
+  STAIN FONT – AI DESIGNED. 0123456789 !?@
+</div>
+<script>
+const t=document.getElementById("text");
+const p=document.getElementById("preview");
+const bSys=document.getElementById("useSystem");
+const bStain=document.getElementById("useStain");
+t.addEventListener("input",()=>p.textContent=t.value||" ");
+bSys.addEventListener("click",()=>p.classList.remove("stain"));
+bStain.addEventListener("click",()=>p.classList.add("stain"));
+</script>
+</body>
+</html>
