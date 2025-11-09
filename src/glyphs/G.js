@@ -40,32 +40,41 @@ export const glyphg=(opentype,adv)=>
     "g",
     "g".codePointAt(0),
     p=>{
-      // lower bowl (main counter)
-      p.moveTo(310,-10);
-      p.curveTo(190,-10,100,80,100,230);
-      p.curveTo(100,380,190,470,310,470);
-      p.curveTo(430,470,520,380,520,230);
-      p.curveTo(520,80,430,-10,310,-10);
+      // single-storey "g" with open top, bowl and right descender
+      const xMin=80,xMax=520;
+      const bowlTop=260,bowlBottom=-10;
+      const base=480,desc=-150;
+
+      // bowl outer
+      p.moveTo(300,bowlBottom);
+      p.curveTo(180,bowlBottom,xMin,80,xMin,230);
+      p.curveTo(xMin,380,190,470,310,470);
+      p.curveTo(410,470,480,430,510,360);
+      // join into stem
+      p.lineTo(510,base);
+      // stem down to descender
+      p.lineTo(450,base);
+      p.lineTo(450,desc);
+      p.lineTo(510,desc);
+      p.lineTo(510,200);
+      p.curveTo(510,80,430,bowlBottom,300,bowlBottom);
       p.close();
-      // inner counter
-      p.moveTo(310,50);
-      p.curveTo(400,50,460,110,460,230);
-      p.curveTo(460,350,400,410,310,410);
-      p.curveTo(220,410,160,350,160,230);
-      p.curveTo(160,110,220,50,310,50);
+
+      // bowl inner
+      p.moveTo(300,50);
+      p.curveTo(390,50,450,110,450,230);
+      p.curveTo(450,350,390,410,300,410);
+      p.curveTo(210,410,150,350,150,230);
+      p.curveTo(150,110,210,50,300,50);
       p.close();
-      // stem + ear: descender and top terminal
-      p.moveTo(430,470);
-      p.curveTo(430,560,390,600,320,600);
-      p.curveTo(280,600,250,590,220,570);
-      p.lineTo(200,620);
-      p.curveTo(240,645,280,660,330,660);
-      p.curveTo(430,660,490,600,490,480);
-      p.lineTo(490,-150);
-      p.lineTo(430,-150);
-      p.lineTo(430,40);
-      p.curveTo(400,10,360,-10,310,-10);
+
+      // open ear/top hook on right side
+      p.moveTo(450,320);
+      p.curveTo(420,260,370,230,310,230);
+      p.lineTo(310,170);
+      p.curveTo(395,170,460,205,500,270);
       p.close();
+
       return p;
     },
     adv
