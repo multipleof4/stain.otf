@@ -1,67 +1,74 @@
-const makeGlyph = (opentype, name, unicode, cmds, adv) =>
+const makeGlyph=(opentype,name,unicode,cmds,adv)=>
   new opentype.Glyph({
     name,
     unicode,
-    advanceWidth: adv,
-    path: cmds(new opentype.Path())
+    advanceWidth:adv,
+    path:cmds(new opentype.Path())
   });
 
-export const glyphG = (opentype, adv) =>
+export const glyphG=(opentype,adv)=>
   makeGlyph(
     opentype,
     "G",
     "G".codePointAt(0),
-    (p) => {
-      p.moveTo(350, -10);
-      p.curveTo(190, -10, 80, 100, 80, 280);
-      p.lineTo(80, 420);
-      p.curveTo(80, 600, 190, 710, 350, 710);
-      p.curveTo(460, 710, 540, 660, 580, 570);
-      p.lineTo(520, 540);
-      p.curveTo(490, 610, 430, 650, 350, 650);
-      p.curveTo(220, 650, 140, 570, 140, 420);
-      p.lineTo(140, 280);
-      p.curveTo(140, 130, 220, 50, 350, 50);
-      p.curveTo(450, 50, 520, 100, 540, 190);
-      p.lineTo(340, 190);
-      p.lineTo(340, 250);
-      p.lineTo(600, 250);
-      p.lineTo(600, 220);
-      p.curveTo(600, 70, 500, -10, 350, -10);
+    p=>{
+      p.moveTo(350,-10);
+      p.curveTo(190,-10,80,100,80,280);
+      p.lineTo(80,420);
+      p.curveTo(80,600,190,710,350,710);
+      p.curveTo(460,710,540,660,580,570);
+      p.lineTo(520,540);
+      p.curveTo(490,610,430,650,350,650);
+      p.curveTo(220,650,140,570,140,420);
+      p.lineTo(140,280);
+      p.curveTo(140,130,220,50,350,50);
+      p.curveTo(450,50,520,100,540,190);
+      p.lineTo(340,190);
+      p.lineTo(340,250);
+      p.lineTo(600,250);
+      p.lineTo(600,220);
+      p.curveTo(600,70,500,-10,350,-10);
       p.close();
       return p;
     },
     adv
   );
 
-export const glyphg = (opentype, adv) =>
+export const glyphg=(opentype,adv)=>
   makeGlyph(
     opentype,
     "g",
     "g".codePointAt(0),
-    (p) => {
-      p.moveTo(310, -10);
-      p.curveTo(250, -10, 200, 10, 160, 40);
-      p.lineTo(160, 0);
-      p.lineTo(100, 0);
-      p.lineTo(100, 480);
-      p.lineTo(160, 480);
-      p.lineTo(160, 440);
-      p.curveTo(200, 470, 250, 490, 310, 490);
-      p.curveTo(430, 490, 520, 400, 520, 240);
-      p.lineTo(520, 180);
-      p.curveTo(520, 20, 430, -70, 310, -70);
-      p.curveTo(220, -70, 150, -30, 110, 40);
-      p.lineTo(160, 70);
-      p.curveTo(190, 20, 240, -10, 310, -10);
-      p.curveTo(400, -10, 460, 50, 460, 180);
-      p.lineTo(460, 240);
-      p.curveTo(460, 370, 400, 430, 310, 430);
-      p.curveTo(220, 430, 160, 370, 160, 240);
-      p.curveTo(160, 110, 220, 50, 310, 50);
+    p=>{
+      const cx=300,cy=210;
+      const rO=170,rI=110;
+      const linkY=-10;
+      const earX=430,earY=390;
+      p.moveTo(cx+rO,cy);
+      p.curveTo(cx+rO,cy+95,cx+95,cy+rO,cx,cy+rO);
+      p.curveTo(cx-95,cy+rO,cx-rO,cy+95,cx-rO,cy);
+      p.curveTo(cx-rO,cy-95,cx-95,cy-rO,cx,cy-rO);
+      p.curveTo(cx+95,cy-rO,cx+rO,cy-95,cx+rO,cy);
+      p.close();
+      p.moveTo(cx+rI,cy);
+      p.curveTo(cx+rI,cy+65,cx+65,cy+rI,cx,cy+rI);
+      p.curveTo(cx-65,cy+rI,cx-rI,cy+65,cx-rI,cy);
+      p.curveTo(cx-rI,cy-65,cx-65,cy-rI,cx,cy-rI);
+      p.curveTo(cx+65,cy-rI,cx+rI,cy-65,cx+rI,cy);
+      p.close();
+      p.moveTo(cx-40,linkY);
+      p.curveTo(cx-120,linkY-70,cx-60,-150,cx+40,-150);
+      p.curveTo(cx+150,-150,cx+190,-70,cx+140,-10);
+      p.lineTo(cx+90,-40);
+      p.curveTo(cx+120,-80,cx+110,-110,cx+60,-110);
+      p.curveTo(cx+10,-110,cx-10,-70,cx-10,-30);
+      p.close();
+      p.moveTo(earX-40,earY);
+      p.lineTo(earX+40,earY);
+      p.lineTo(earX+30,470);
+      p.lineTo(earX-30,470);
       p.close();
       return p;
     },
     adv
   );
-
