@@ -12,27 +12,25 @@ export const glyphB=(opentype,adv)=>
     "B",
     "B".codePointAt(0),
     p=>{
-      const s=90;
-      const x0=110,x1=x0+s;
-      const top=700,mid=360,bot=0;
-      const ix=320;
-      const oTop=560,oMid=520,oBot=bot;
-      p.moveTo(x0,bot);
-      p.lineTo(x0,top);
-      p.lineTo(x1,top);
-      p.lineTo(x1,bot);
+      p.moveTo(100,0);
+      p.lineTo(100,700);
+      p.lineTo(320,700);
+      p.curveTo(440,700,520,640,520,550);
+      p.curveTo(520,490,480,440,420,410);
+      p.curveTo(490,380,530,320,530,250);
+      p.curveTo(530,140,450,0,300,0);
       p.close();
-      p.moveTo(ix,top);
-      p.curveTo(oTop,top,oTop-10,top-70,oTop-40,top-120);
-      p.curveTo(oTop-70,top-180,ix+40,mid+80,ix,mid+80);
-      p.lineTo(x1,mid+80);
-      p.lineTo(x1,top- s/2);
+      p.moveTo(160,60);
+      p.lineTo(300,60);
+      p.curveTo(410,60,470,130,470,250);
+      p.curveTo(470,370,410,370,300,370);
+      p.lineTo(160,370);
       p.close();
-      p.moveTo(ix,mid);
-      p.curveTo(oMid,mid,oMid+40,mid-80,oMid+40,mid-150);
-      p.curveTo(oMid+40,200,oMid-40,120,ix,120);
-      p.lineTo(x1,120);
-      p.lineTo(x1,mid);
+      p.moveTo(160,430);
+      p.lineTo(320,430);
+      p.curveTo(410,430,460,480,460,550);
+      p.curveTo(460,620,410,640,320,640);
+      p.lineTo(160,640);
       p.close();
       return p;
     },
