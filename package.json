@@ -1,11 +1,10 @@
 {
   "name": "stainfont",
-  "version": "0.3.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "build:font": "node scripts/build-font.js",
-    "build": "npm run build:font"
+    "build": "node scripts/build-font.js"
   },
   "dependencies": {
     "opentype.js": "^1.3.4"
