@@ -18,23 +18,23 @@ const ascender = 800;
 const descender = -200;
 const advanceWidth = 600;
 
+const glyphs = [
+  glyphA(opentype, advanceWidth),
+  glypha(opentype, advanceWidth),
+  glyphB(opentype, advanceWidth),
+  glyphb(opentype, advanceWidth),
+  glyphC(opentype, advanceWidth),
+  glyphc(opentype, advanceWidth)
+];
+
 const font = new opentype.Font({
   familyName,
   styleName: "Regular",
   unitsPerEm,
   ascender,
   descender,
-  glyphs: []
+  glyphs
 });
-
-const addGlyph = (g) => font.addGlyph(g);
-
-addGlyph(glyphA(opentype, advanceWidth));
-addGlyph(glypha(opentype, advanceWidth));
-addGlyph(glyphB(opentype, advanceWidth));
-addGlyph(glyphb(opentype, advanceWidth));
-addGlyph(glyphC(opentype, advanceWidth));
-addGlyph(glyphc(opentype, advanceWidth));
 
 const otfBuffer = Buffer.from(font.toArrayBuffer());
 const baseName = "Stain";
