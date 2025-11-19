@@ -1,57 +1,13 @@
-const makeGlyph = (opentype, name, unicode, cmds, adv) =>
-  new opentype.Glyph({
-    name,
-    unicode,
-    advanceWidth: adv,
-    path: cmds(new opentype.Path())
-  });
-
-export const glyphR = (opentype, adv) =>
-  makeGlyph(
-    opentype,
-    "R",
-    "R".codePointAt(0),
-    (p) => {
-      p.moveTo(100, 0);
-      p.lineTo(100, 700);
-      p.lineTo(340, 700);
-      p.curveTo(470, 700, 560, 630, 560, 520);
-      p.curveTo(560, 430, 500, 370, 410, 350);
-      p.lineTo(560, 0);
-      p.lineTo(490, 0);
-      p.lineTo(350, 340);
-      p.lineTo(160, 340);
-      p.lineTo(160, 0);
-      p.close();
-      p.moveTo(160, 400);
-      p.lineTo(340, 400);
-      p.curveTo(440, 400, 500, 450, 500, 520);
-      p.curveTo(500, 590, 440, 640, 340, 640);
-      p.lineTo(160, 640);
-      p.close();
-      return p;
-    },
-    adv
-  );
-
-export const glyphr = (opentype, adv) =>
-  makeGlyph(
-    opentype,
-    "r",
-    "r".codePointAt(0),
-    (p) => {
-      p.moveTo(100, 0);
-      p.lineTo(100, 480);
-      p.lineTo(160, 480);
-      p.lineTo(160, 420);
-      p.curveTo(190, 460, 240, 490, 300, 490);
-      p.curveTo(340, 490, 370, 480, 400, 460);
-      p.lineTo(380, 400);
-      p.curveTo(360, 410, 340, 420, 310, 420);
-      p.curveTo(230, 420, 160, 370, 160, 280);
-      p.lineTo(160, 0);
-      p.close();
-      return p;
-    },
-    adv
-  );
+const mk=(o,n,u,d,w)=>new o.Glyph({name:n,unicode:u,advanceWidth:w,path:d(new o.Path())});
+export const glyphR=(o,w)=>mk(o,"R",82,p=>{
+  p.moveTo(80,0);p.lineTo(80,700);p.lineTo(340,700);p.curveTo(540,700,540,380,340,380);
+  p.lineTo(160,380);p.lineTo(160,0);p.close();
+  p.moveTo(160,620);p.lineTo(340,620);p.curveTo(460,620,460,460,340,460);p.lineTo(160,460);p.close();
+  p.moveTo(300,380);p.lineTo(480,0);p.lineTo(380,0);p.lineTo(220,380);p.close();
+  return p;
+},w);
+export const glyphr=(o,w)=>mk(o,"r",114,p=>{
+  p.moveTo(80,0);p.lineTo(80,480);p.lineTo(160,480);p.lineTo(160,280);p.curveTo(160,480,380,480,380,360);
+  p.lineTo(380,280);p.curveTo(300,280,240,280,240,100);p.lineTo(240,0);p.lineTo(160,0);p.close();
+  return p;
+},w);
