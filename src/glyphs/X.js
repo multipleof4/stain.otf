@@ -1,56 +1,13 @@
-const makeGlyph = (opentype, name, unicode, cmds, adv) =>
-  new opentype.Glyph({
-    name,
-    unicode,
-    advanceWidth: adv,
-    path: cmds(new opentype.Path())
-  });
-
-export const glyphX = (opentype, adv) =>
-  makeGlyph(
-    opentype,
-    "X",
-    "X".codePointAt(0),
-    (p) => {
-      p.moveTo(60, 0);
-      p.lineTo(240, 350);
-      p.lineTo(60, 700);
-      p.lineTo(140, 700);
-      p.lineTo(280, 410);
-      p.lineTo(420, 700);
-      p.lineTo(500, 700);
-      p.lineTo(320, 350);
-      p.lineTo(500, 0);
-      p.lineTo(420, 0);
-      p.lineTo(280, 290);
-      p.lineTo(140, 0);
-      p.close();
-      return p;
-    },
-    adv
-  );
-
-export const glyphx = (opentype, adv) =>
-  makeGlyph(
-    opentype,
-    "x",
-    "x".codePointAt(0),
-    (p) => {
-      p.moveTo(60, 0);
-      p.lineTo(220, 240);
-      p.lineTo(60, 480);
-      p.lineTo(130, 480);
-      p.lineTo(250, 290);
-      p.lineTo(370, 480);
-      p.lineTo(440, 480);
-      p.lineTo(280, 240);
-      p.lineTo(440, 0);
-      p.lineTo(370, 0);
-      p.lineTo(250, 190);
-      p.lineTo(130, 0);
-      p.close();
-      return p;
-    },
-    adv
-  );
-
+const mk=(o,n,u,d,w)=>new o.Glyph({name:n,unicode:u,advanceWidth:w,path:d(new o.Path())});
+export const glyphX=(o,w)=>mk(o,"X",88,p=>{
+  p.moveTo(60,700);p.lineTo(150,700);p.lineTo(300,420);p.lineTo(450,700);p.lineTo(540,700);
+  p.lineTo(350,350);p.lineTo(540,0);p.lineTo(450,0);p.lineTo(300,280);p.lineTo(150,0);
+  p.lineTo(60,0);p.lineTo(250,350);p.close();
+  return p;
+},w);
+export const glyphx=(o,w)=>mk(o,"x",120,p=>{
+  p.moveTo(60,480);p.lineTo(150,480);p.lineTo(300,280);p.lineTo(450,480);p.lineTo(540,480);
+  p.lineTo(350,240);p.lineTo(540,0);p.lineTo(450,0);p.lineTo(300,200);p.lineTo(150,0);
+  p.lineTo(60,0);p.lineTo(250,240);p.close();
+  return p;
+},w);
