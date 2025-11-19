@@ -29,111 +29,38 @@ import { glyphX, glyphx } from "../src/glyphs/X.js";
 import { glyphY, glypthy as glyphy } from "../src/glyphs/Y.js";
 import { glyphZ, glyphz } from "../src/glyphs/Z.js";
 
-const __filename=fileURLToPath(import.meta.url);
-const __dirname=path.dirname(__filename);
+const __filename = fileURLToPath(import.meta.url);
+const outDir = path.join(path.dirname(__filename), "..", "dist");
+if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
 
-const outDir=path.join(__dirname,"..","dist");
-if(!fs.existsSync(outDir))fs.mkdirSync(outDir,{recursive:true});
+const mkGlyph = (n, u, a, fn) => new opentype.Glyph({ name: n, unicode: u, advanceWidth: a, path: fn(new opentype.Path()) });
 
-const familyName="Stain";
-const styleName="Regular";
-const unitsPerEm=1000;
-const ascender=800;
-const descender=-200;
-const defaultAdv=600;
+// Candara-ish tracking: wider capitals, tighter lower, distinct narrow/wide glyphs
+const w = { A:660, B:620, C:600, D:640, E:580, F:550, G:650, H:700, I:260, J:450, K:600, L:540, M:840, N:700, O:680, P:600, Q:680, R:620, S:560, T:560, U:680, V:620, W:880, X:620, Y:600, Z:580,
+a:530, b:560, c:490, d:560, e:510, f:320, g:540, h:540, i:240, j:240, k:500, l:240, m:820, n:540, o:550, p:560, q:560, r:360, s:440, t:360, u:540, v:500, w:760, x:500, y:500, z:460 };
 
-const mkGlyph=(name,unicode,adv,pathFn)=>
-  new opentype.Glyph({
-    name,
-    unicode,
-    advanceWidth:adv,
-    path:pathFn(new opentype.Path())
-  });
-
-const glyphSpace=mkGlyph("space"," ".codePointAt(0),260,p=>p);
-const glyphPeriod=mkGlyph(
-  "period",
-  ".".codePointAt(0),
-  260,
-  p=>{
-    p.moveTo(80,0);
-    p.lineTo(80,120);
-    p.lineTo(180,120);
-    p.lineTo(180,0);
-    p.close();
-    return p;
-  }
-);
-
-const glyphList=[
-  glyphSpace,
-  glyphPeriod,
-  glyphA(opentype,defaultAdv),
-  glypha(opentype,defaultAdv),
-  glyphB(opentype,defaultAdv),
-  glyphb(opentype,defaultAdv),
-  glyphC(opentype,defaultAdv),
-  glyphc(opentype,defaultAdv),
-  glyphD(opentype,defaultAdv),
-  glyphd(opentype,defaultAdv),
-  glyphE(opentype,defaultAdv),
-  glyphe(opentype,defaultAdv),
-  glyphF(opentype,defaultAdv),
-  glyphf(opentype,defaultAdv),
-  glyphG(opentype,defaultAdv),
-  glyphg(opentype,defaultAdv),
-  glyphH(opentype,defaultAdv),
-  glyphh(opentype,defaultAdv),
-  glyphI(opentype,defaultAdv),
-  glyphi(opentype,defaultAdv),
-  glyphJ(opentype,defaultAdv),
-  glyphj(opentype,defaultAdv),
-  glyphK(opentype,defaultAdv),
-  glyphk(opentype,defaultAdv),
-  glyphL(opentype,defaultAdv),
-  glyphl(opentype,defaultAdv),
-  glyphM(opentype,740),
-  glyphm(opentype,740),
-  glyphN(opentype,defaultAdv),
-  glyphn(opentype,defaultAdv),
-  glyphO(opentype,defaultAdv),
-  glypho(opentype,defaultAdv),
-  glyphP(opentype,defaultAdv),
-  glyphp(opentype,defaultAdv),
-  glyphQ(opentype,defaultAdv),
-  glyphq(opentype,defaultAdv),
-  glyphR(opentype,defaultAdv),
-  glyphr(opentype,defaultAdv),
-  glyphS(opentype,defaultAdv),
-  glyphsLowerS(opentype,defaultAdv),
-  glyphT(opentype,defaultAdv),
-  glypht(opentype,defaultAdv),
-  glyphU(opentype,defaultAdv),
-  glyphu(opentype,defaultAdv),
-  glyphV(opentype,defaultAdv),
-  glyphv(opentype,defaultAdv),
-  glyphW(opentype,760),
-  glyphw(opentype,660),
-  glyphX(opentype,defaultAdv),
-  glyphx(opentype,defaultAdv),
-  glyphY(opentype,defaultAdv),
-  glyphy(opentype,defaultAdv),
-  glyphZ(opentype,defaultAdv),
-  glyphz(opentype,defaultAdv)
+const list = [
+  mkGlyph("space", 32, 250, p => p),
+  mkGlyph("period", 46, 240, p => p.moveTo(70,0).lineTo(70,120).lineTo(170,120).lineTo(170,0).close()),
+  glyphA(opentype, w.A), glypha(opentype, w.a), glyphB(opentype, w.B), glyphb(opentype, w.b),
+  glyphC(opentype, w.C), glyphc(opentype, w.c), glyphD(opentype, w.D), glyphd(opentype, w.d),
+  glyphE(opentype, w.E), glyphe(opentype, w.e), glyphF(opentype, w.F), glyphf(opentype, w.f),
+  glyphG(opentype, w.G), glyphg(opentype, w.g), glyphH(opentype, w.H), glyphh(opentype, w.h),
+  glyphI(opentype, w.I), glyphi(opentype, w.i), glyphJ(opentype, w.J), glyphj(opentype, w.j),
+  glyphK(opentype, w.K), glyphk(opentype, w.k), glyphL(opentype, w.L), glyphl(opentype, w.l),
+  glyphM(opentype, w.M), glyphm(opentype, w.m), glyphN(opentype, w.N), glyphn(opentype, w.n),
+  glyphO(opentype, w.O), glypho(opentype, w.o), glyphP(opentype, w.P), glyphp(opentype, w.p),
+  glyphQ(opentype, w.Q), glyphq(opentype, w.q), glyphR(opentype, w.R), glyphr(opentype, w.r),
+  glyphS(opentype, w.S), glyphsLowerS(opentype, w.s), glyphT(opentype, w.T), glypht(opentype, w.t),
+  glyphU(opentype, w.U), glyphu(opentype, w.u), glyphV(opentype, w.V), glyphv(opentype, w.v),
+  glyphW(opentype, w.W), glyphw(opentype, w.w), glyphX(opentype, w.X), glyphx(opentype, w.x),
+  glyphY(opentype, w.Y), glyphy(opentype, w.y), glyphZ(opentype, w.Z), glyphz(opentype, w.z)
 ];
 
-const font=new opentype.Font({
-  familyName,
-  styleName,
-  unitsPerEm,
-  ascender,
-  descender,
-  glyphs:glyphList,
-  copyright:"Author: Anon. License: CC0 1.0 Universal."
+const font = new opentype.Font({
+  familyName: "Stain", styleName: "Regular", unitsPerEm: 1000, ascender: 750, descender: -220, glyphs: list,
+  copyright: "CC0 1.0 Universal"
 });
-
-const buf=Buffer.from(font.toArrayBuffer());
-const outPath=path.join(outDir,"Stain.otf");
-fs.writeFileSync(outPath,buf);
+const outPath = path.join(outDir, "Stain.otf");
+fs.writeFileSync(outPath, Buffer.from(font.toArrayBuffer()));
 console.log(`Built ${outPath}`);
-
