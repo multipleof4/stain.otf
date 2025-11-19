@@ -1,13 +1,6 @@
-const mk=(o,n,u,d,w)=>new o.Glyph({name:n,unicode:u,advanceWidth:w,path:d(new o.Path())});
-export const glyphX=(o,w)=>mk(o,"X",88,p=>{
-  p.moveTo(60,700);p.lineTo(150,700);p.lineTo(300,420);p.lineTo(450,700);p.lineTo(540,700);
-  p.lineTo(350,350);p.lineTo(540,0);p.lineTo(450,0);p.lineTo(300,280);p.lineTo(150,0);
-  p.lineTo(60,0);p.lineTo(250,350);p.close();
-  return p;
-},w);
-export const glyphx=(o,w)=>mk(o,"x",120,p=>{
-  p.moveTo(60,480);p.lineTo(150,480);p.lineTo(300,280);p.lineTo(450,480);p.lineTo(540,480);
-  p.lineTo(350,240);p.lineTo(540,0);p.lineTo(450,0);p.lineTo(300,200);p.lineTo(150,0);
-  p.lineTo(60,0);p.lineTo(250,240);p.close();
-  return p;
-},w);
+export const glyphX=(o,w)=>new o.Glyph({name:"X",unicode:88,advanceWidth:w,path:(p=>{
+  p.moveTo(35,0).lineTo(240,340).lineTo(40,700).lineTo(140,700).lineTo(285,430).lineTo(435,700).lineTo(535,700).lineTo(330,350).lineTo(545,0).lineTo(445,0).lineTo(280,280).lineTo(130,0).close(); return p;
+})(new o.Path())});
+export const glyphx=(o,w)=>new o.Glyph({name:"x",unicode:120,advanceWidth:w,path:(p=>{
+  p.moveTo(35,0).lineTo(200,245).lineTo(55,500).lineTo(150,500).lineTo(250,320).lineTo(350,500).lineTo(445,500).lineTo(300,250).lineTo(475,0).lineTo(375,0).lineTo(245,200).lineTo(130,0).close(); return p;
+})(new o.Path())});
