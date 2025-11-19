@@ -1,10 +1,6 @@
-const mk=(o,n,u,d,w)=>new o.Glyph({name:n,unicode:u,advanceWidth:w,path:d(new o.Path())});
-export const glyphL=(o,w)=>mk(o,"L",76,p=>{
-  p.moveTo(80,0);p.lineTo(80,700);p.lineTo(160,700);p.lineTo(160,80);p.lineTo(520,80);
-  p.lineTo(520,0);p.close();
-  return p;
-},w);
-export const glyphl=(o,w)=>mk(o,"l",108,p=>{
-  p.moveTo(260,0);p.lineTo(260,710);p.lineTo(340,710);p.lineTo(340,0);p.close();
-  return p;
-},w);
+export const glyphL=(o,w)=>new o.Glyph({name:"L",unicode:76,advanceWidth:w,path:(p=>{
+  p.moveTo(90,0).lineTo(90,700).lineTo(175,700).lineTo(175,75).lineTo(475,75).lineTo(475,0).close(); return p;
+})(new o.Path())});
+export const glyphl=(o,w)=>new o.Glyph({name:"l",unicode:108,advanceWidth:w,path:(p=>{
+  p.moveTo(85,0).lineTo(85,720).lineTo(165,720).lineTo(165,75).curveTo(165,30,220,10,240,0).close(); return p;
+})(new o.Path())});
