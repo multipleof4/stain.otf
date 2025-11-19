@@ -1,15 +1,14 @@
-const mk=(o,n,u,d,w)=>new o.Glyph({name:n,unicode:u,advanceWidth:w,path:d(new o.Path())});
-export const glyphS=(o,w)=>mk(o,"S",83,p=>{
-  p.moveTo(500,580);p.lineTo(420,540);p.curveTo(400,620,300,620,300,620);p.curveTo(180,620,180,520,300,500);
-  p.lineTo(360,490);p.curveTo(520,460,520,240,300,240);p.curveTo(140,240,100,340,100,340);
-  p.lineTo(180,380);p.curveTo(200,320,300,320,300,320);p.curveTo(420,320,420,400,300,420);
-  p.lineTo(240,430);p.curveTo(80,460,80,700,300,700);p.curveTo(460,700,500,580,500,580);p.close();
-  return p;
-},w);
-export const glyphs=(o,w)=>mk(o,"s",115,p=>{
-  p.moveTo(460,380);p.lineTo(380,360);p.curveTo(360,420,300,420,300,420);p.curveTo(200,420,200,340,300,320);
-  p.lineTo(340,310);p.curveTo(460,280,460,100,300,100);p.curveTo(140,100,120,200,120,200);
-  p.lineTo(200,220);p.curveTo(220,180,300,180,300,180);p.curveTo(380,180,380,240,300,260);
-  p.lineTo(260,270);p.curveTo(120,300,120,490,300,490);p.curveTo(440,490,460,380,460,380);p.close();
-  return p;
-},w);
+export const glyphS=(o,w)=>new o.Glyph({name:"S",unicode:83,advanceWidth:w,path:(p=>{
+  p.moveTo(500,225).curveTo(495,85,415,-15,290,-15).curveTo(175,-15,100,30,60,115).lineTo(125,155)
+   .curveTo(155,95,205,65,275,65).curveTo(350,65,390,105,390,160).curveTo(390,225,325,240,265,260)
+   .curveTo(140,295,65,340,65,450).curveTo(65,590,175,715,300,715).curveTo(410,715,480,660,510,580).lineTo(440,540)
+   .curveTo(410,600,365,640,305,640).curveTo(220,640,170,600,170,520).curveTo(170,475,200,455,310,420)
+   .curveTo(445,375,505,320,505,225).close(); return p;
+})(new o.Path())});
+export const glyphs=(o,w)=>new o.Glyph({name:"s",unicode:115,advanceWidth:w,path:(p=>{
+  p.moveTo(390,140).curveTo(385,50,325,-15,235,-15).curveTo(145,-15,95,30,50,95).lineTo(110,135)
+  .curveTo(130,85,165,55,215,55).curveTo(290,55,300,100,300,125).curveTo(300,165,285,180,235,195)
+  .curveTo(140,220,60,250,60,345).curveTo(60,430,130,506,230,506).curveTo(325,506,370,460,405,405).lineTo(350,365)
+  .curveTo(320,405,285,435,230,435).curveTo(160,435,145,395,145,360).curveTo(145,335,160,305,245,275)
+  .curveTo(345,245,395,200,395,140).close(); return p;
+})(new o.Path())});
