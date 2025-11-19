@@ -6,17 +6,16 @@ export const glyphG=(o,w)=>new o.Glyph({name:"G",unicode:71,advanceWidth:w,path:
 })(new o.Path())});
 
 export const glyphg=(o,w)=>new o.Glyph({name:"g",unicode:103,advanceWidth:w,path:(p=>{
-  // Refined Single-story 'g'
-  p.moveTo(480,500).lineTo(405,500).lineTo(405,440) // Stem
-   .curveTo(360,500,295,515,220,515).curveTo(100,515,40,395,40,260) // Bowl left
-   .curveTo(40,115,95,-5,185,-5).curveTo(260,-5,325,25,360,60) // Bowl bottom/connection
-   .lineTo(365,-40) // Tail start
-   .curveTo(370,-130,320,-200,200,-200).curveTo(140,-200,95,-180,65,-155) // Loop bottom
-   .lineTo(35,-215).curveTo(80,-265,145,-285,205,-285) // Loop outer
+  p.moveTo(480,440) // Start below top to form round shoulder, removing ear/corner
+   .curveTo(480,515,360,515,220,515).curveTo(100,515,40,395,40,260) // Bowl
+   .curveTo(40,115,95,-5,185,-5).curveTo(260,-5,325,25,360,60) 
+   .lineTo(365,-40) 
+   .curveTo(370,-130,320,-200,200,-200).curveTo(140,-200,95,-180,65,-155) // Loop
+   .lineTo(35,-215).curveTo(80,-265,145,-285,205,-285)
    .curveTo(355,-285,440,-200,450,-40).lineTo(480,-40)
-   .lineTo(480,500).close()
-   .moveTo(235,435).curveTo(335,435,395,355,395,260) // Hole top right
-   .curveTo(395,145,335,75,235,75).curveTo(135,75,125,145,125,260) // Hole bottom left
+   .lineTo(480,440).close()
+   .moveTo(235,435).curveTo(335,435,395,355,395,260) // Hole
+   .curveTo(395,145,335,75,235,75).curveTo(135,75,125,145,125,260)
    .curveTo(125,360,135,435,235,435).close();
   return p;
 })(new o.Path())});
