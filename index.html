@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
-      --bg: #f7f6f2;
-      --ink: #1c1c1e;
-      --stain-color: #2d3436;
+      --bg: #f8f7f2;
+      --ink: #1a1a1a;
+      --accent: #a6a6a6;
     }
     @font-face { font-family: "Stain"; src: url("./dist/Stain.otf") format("opentype"); }
     * { box-sizing: border-box; }
@@ -16,90 +16,82 @@
       margin: 0; min-height: 100vh;
       background: var(--bg); color: var(--ink);
       font-family: "Stain", sans-serif;
-      overflow-x: hidden; display: flex; flex-direction: column;
-      cursor: crosshair;
+      overflow-x: hidden;
+      padding: 2rem;
     }
-    /* Ink Bleed Background */
-    .blot {
-      position: absolute; border-radius: 50%;
-      filter: blur(50px); opacity: 0.12; z-index: -1;
-      background: var(--stain-color); pointer-events: none;
+    /* Creative ink stains */
+    .stain-mark {
+      position: absolute; z-index: -1; pointer-events: none; opacity: 0.06;
+      background: #000; border-radius: 50%; filter: blur(30px);
     }
-    .b1 { width: 400px; height: 380px; top: -100px; left: -100px; border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
-    .b2 { width: 500px; height: 500px; bottom: -150px; right: -100px; background: #1e272e; border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-    .b3 { width: 200px; height: 200px; top: 40%; left: 60%; opacity: 0.08; border-radius: 50% 50% 20% 80%; }
-
-    .layout {
-      max-width: 1000px; margin: 0 auto; padding: 4rem 2rem;
-      display: flex; flex-direction: column; gap: 3rem; flex: 1; justify-content: center;
-    }
-    header { text-align: center; position: relative; }
+    .s1 { top: -5%; left: -5%; width: 40vw; height: 40vw; }
+    .s2 { bottom: -10%; right: -5%; width: 50vw; height: 50vw; }
+    .s3 { top: 40%; left: 60%; width: 200px; height: 200px; filter: blur(60px); opacity: 0.08; }
     
-    /* Ink Splatter Decorative */
-    header::after {
-      content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-15deg);
-      width: 120%; height: 200px; border: 2px solid var(--ink); opacity: 0.05;
-      border-radius: 80% 20% 80% 20% / 80% 80% 20% 20%; z-index: -1;
+    .container {
+      max-width: 900px; margin: 0 auto;
+      min-height: 85vh; display: flex; flex-direction: column; justify-content: space-between;
     }
-
-    h1 {
-      font-size: clamp(4rem, 18vw, 12rem);
-      line-height: 0.8; margin: 0; letter-spacing: -0.03em;
-      text-transform: uppercase;
-      filter: contrast(150%);
+    header { 
+      text-align: center; 
+      border-bottom: 4px solid var(--ink); 
+      padding-bottom: 2rem; margin-bottom: 4rem;
+      border-radius: 0 0 50% 50% / 0 0 10px 10px; /* Ink bleed edge */
     }
-    p { font-size: clamp(1.5rem, 4vw, 2.5rem); line-height: 1.1; margin: 0; }
+    h1 { font-size: clamp(4rem, 15vw, 9rem); margin: 0; line-height: 0.8; text-transform: uppercase; }
     
-    .hero-block { display: grid; gap: 1.5rem; text-align: center; }
+    /* Dictionary definition block */
+    .def-block { margin-bottom: 4rem; }
+    .word { font-size: clamp(3rem, 8vw, 5rem); margin: 0 0 1rem; display: block; }
+    .pos { font-size: 1.5rem; color: var(--accent); display: block; margin-bottom: 1.5rem; font-style: italic; }
+    .meaning {
+      font-size: clamp(1.2rem, 3.5vw, 2rem); 
+      line-height: 1.2; 
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+      border-left: 3px solid var(--accent);
+    }
     
-    .actions { margin-top: auto; padding-top: 3rem; text-align: center; }
+    .info { text-align: center; font-size: 1.1rem; color: var(--accent); margin: 3rem 0; text-transform: uppercase; letter-spacing: 0.05em; }
+    
+    .download-area { text-align: center; margin-top: auto; }
     .btn {
-      display: inline-block; padding: 1rem 3rem;
-      border: 2px solid var(--ink);
-      border-radius: 50% 90% 80% 50% / 90% 90% 60% 60%; /* Imperfect circle */
-      font-size: 1.5rem; text-decoration: none; color: var(--ink);
-      transition: all 0.2s ease; background: transparent;
+      display: inline-block; padding: 1.5rem 3rem;
+      font-size: 2rem; color: var(--bg); background: var(--ink);
+      text-decoration: none; border-radius: 90% 40% 80% 30% / 40% 80% 50% 70%; /* organic blot shape */
+      transition: 0.2s ease;
     }
-    .btn:hover {
-      background: var(--ink); color: var(--bg);
-      border-radius: 90% 60% 50% 90% / 60% 50% 90% 80%;
-      transform: scale(1.02) rotate(1deg);
-    }
-    .meta { margin-top: 2rem; opacity: 0.6; font-size: 1.2rem; }
-    .meta a { color: inherit; }
-    
-    /* Small coffee ring effect on bottom right fixed */
-    .ring {
-      position: fixed; bottom: 30px; right: 30px; width: 150px; height: 150px;
-      border: 4px solid #634d38; border-radius: 55% 45% 50% 50% / 50% 60% 40% 50%;
-      opacity: 0.1; pointer-events: none; transform: rotate(45deg);
-    }
+    .btn:hover { transform: scale(1.05) rotate(-1deg); border-radius: 50% 90% 30% 80% / 90% 30% 70% 40%; }
+    .repo-link { display: block; margin-top: 2rem; color: var(--ink); text-decoration: none; font-size: 1rem; }
+    .repo-link:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
-  <div class="blot b1"></div>
-  <div class="blot b2"></div>
-  <div class="blot b3"></div>
-  <div class="ring"></div>
+  <div class="stain-mark s1"></div>
+  <div class="stain-mark s2"></div>
+  <div class="stain-mark s3"></div>
 
-  <div class="layout">
+  <div class="container">
     <header>
-      <h1>STAIN FONT</h1>
+      <h1>Stain Font</h1>
     </header>
 
-    <div class="hero-block">
-      <p>A PROGRAMMATIC FONT INSPIRED BY CANDARA.</p>
-      <p>PURE OPEN SOURCE.</p>
-      <p>PUBLIC DOMAIN.</p>
-      <p>MADE BY CODE.</p>
-    </div>
+    <section class="def-block">
+      <span class="word">stain</span>
+      <span class="pos">noun</span>
+      <div class="meaning">1. a colored patch or dirty mark that is difficult to remove.</div>
+      <div class="meaning">2. a mark of disgrace associated with a particular circumstance quality or person.</div>
+    </section>
 
-    <div class="actions">
+    <section class="info">
+      A programmatic font inspired by Candara.<br>
+      Open Source. Public Domain.
+    </section>
+
+    <section class="download-area">
       <a href="./dist/Stain.otf" class="btn" download>Download Stain.OTF</a>
-      <div class="meta">
-        <a href="https://github.com/multipleof4/stain.otf">multipleof4 slash stain.otf</a>
-      </div>
-    </div>
+      <a href="https://github.com/multipleof4/stain.otf" class="repo-link">github.com / multipleof4 / stain.otf</a>
+    </section>
   </div>
 </body>
 </html>
