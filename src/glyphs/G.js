@@ -6,17 +6,15 @@ export const glyphG=(o,w)=>new o.Glyph({name:"G",unicode:71,advanceWidth:w,path:
 })(new o.Path())});
 
 export const glyphg=(o,w)=>new o.Glyph({name:"g",unicode:103,advanceWidth:w,path:(p=>{
-  p.moveTo(480,440) // Start below top to form round shoulder, removing ear/corner
-   .curveTo(480,515,360,515,220,515).curveTo(100,515,40,395,40,260) // Bowl
-   .curveTo(40,115,95,-5,185,-5).curveTo(260,-5,325,25,360,60) 
-   .lineTo(365,-40) 
-   .curveTo(370,-130,320,-200,200,-200).curveTo(140,-200,95,-180,65,-155) // Loop
-   .lineTo(35,-215).curveTo(80,-265,145,-285,205,-285)
-   .curveTo(355,-285,440,-200,450,-40).lineTo(480,-40)
-   .lineTo(480,440).close()
-   .moveTo(235,435).curveTo(335,435,395,355,395,260) // Hole
-   .curveTo(395,145,335,75,235,75).curveTo(135,75,125,145,125,260)
-   .curveTo(125,360,135,435,235,435).close();
+  // Clean single-story g: a 'q' with a curved tail
+  p.moveTo(445,500).lineTo(375,500).lineTo(375,435)
+   .curveTo(340,490,270,515,210,515).curveTo(90,515,40,395,40,250)
+   .curveTo(40,105,105,-15,225,-15).curveTo(290,-15,340,20,375,65).lineTo(375,-60) // Stem merge
+   .curveTo(375,-150,340,-200,235,-200).curveTo(180,-200,125,-180,95,-160) // Tail hook
+   .lineTo(65,-225).curveTo(115,-265,190,-275,245,-275)
+   .curveTo(410,-275,450,-175,450,-45).lineTo(450,500).close() // Back up stem
+   .moveTo(245,60).curveTo(160,60,125,125,125,250).curveTo(125,375,160,440,245,440)
+   .curveTo(325,440,375,385,375,250).curveTo(375,120,330,60,245,60).close();
   return p;
 })(new o.Path())});
 
