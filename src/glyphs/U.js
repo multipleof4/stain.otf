@@ -1,55 +1,12 @@
-const makeGlyph = (opentype, name, unicode, cmds, adv) =>
-  new opentype.Glyph({
-    name,
-    unicode,
-    advanceWidth: adv,
-    path: cmds(new opentype.Path())
-  });
-
-export const glyphU = (opentype, adv) =>
-  makeGlyph(
-    opentype,
-    "U",
-    "U".codePointAt(0),
-    (p) => {
-      p.moveTo(300, -10);
-      p.curveTo(170, -10, 80, 70, 80, 200);
-      p.lineTo(80, 700);
-      p.lineTo(140, 700);
-      p.lineTo(140, 200);
-      p.curveTo(140, 100, 210, 50, 300, 50);
-      p.curveTo(390, 50, 460, 100, 460, 200);
-      p.lineTo(460, 700);
-      p.lineTo(520, 700);
-      p.lineTo(520, 200);
-      p.curveTo(520, 70, 430, -10, 300, -10);
-      p.close();
-      return p;
-    },
-    adv
-  );
-
-export const glyphu = (opentype, adv) =>
-  makeGlyph(
-    opentype,
-    "u",
-    "u".codePointAt(0),
-    (p) => {
-      p.moveTo(100, 160);
-      p.lineTo(100, 480);
-      p.lineTo(160, 480);
-      p.lineTo(160, 160);
-      p.curveTo(160, 80, 200, 50, 270, 50);
-      p.curveTo(350, 50, 420, 90, 420, 180);
-      p.lineTo(420, 480);
-      p.lineTo(480, 480);
-      p.lineTo(480, 40);
-      p.lineTo(420, 40);
-      p.lineTo(420, 100);
-      p.curveTo(380, 50, 330, 20, 270, 20);
-      p.curveTo(160, 20, 100, 80, 100, 160);
-      p.close();
-      return p;
-    },
-    adv
-  );
+const mk=(o,n,u,d,w)=>new o.Glyph({name:n,unicode:u,advanceWidth:w,path:d(new o.Path())});
+export const glyphU=(o,w)=>mk(o,"U",85,p=>{
+  p.moveTo(80,700);p.lineTo(160,700);p.lineTo(160,240);p.curveTo(160,0,440,0,440,240);
+  p.lineTo(440,700);p.lineTo(520,700);p.lineTo(520,240);p.curveTo(520,-100,80,-100,80,240);p.close();
+  return p;
+},w);
+export const glyphu=(o,w)=>mk(o,"u",117,p=>{
+  p.moveTo(80,480);p.lineTo(160,480);p.lineTo(160,180);p.curveTo(160,80,360,80,360,180);
+  p.lineTo(360,480);p.lineTo(440,480);p.lineTo(440,0);p.lineTo(360,0);p.lineTo(360,80);
+  p.curveTo(360,-20,80,-20,80,180);p.close();
+  return p;
+},w);
