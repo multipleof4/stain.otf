@@ -6,16 +6,14 @@ export const glyphG=(o,w)=>new o.Glyph({name:"G",unicode:71,advanceWidth:w,path:
 })(new o.Path())});
 
 export const glyphg=(o,w)=>new o.Glyph({name:"g",unicode:103,advanceWidth:w,path:(p=>{
-  // Double-story g structure: Ear, Top Bowl, Link, Bottom Loop
-  p.moveTo(380,510).lineTo(260,510).curveTo(160,510,70,435,70,340).curveTo(70,270,110,215,190,200)
-   .curveTo(130,190,60,145,60,65).curveTo(60,-25,130,-200,225,-200).curveTo(375,-200,435,-85,440,50)
-   .lineTo(500,50).lineTo(515,345).curveTo(535,390,540,465,540,485).lineTo(480,485) // Ear
-   .curveTo(470,445,455,365,440,330).lineTo(440,340).curveTo(440,430,435,510,380,510).close()
-   // Top Hole (Counter-Clockwise relative to shape)
-   .moveTo(360,345).curveTo(360,280,310,255,250,255).curveTo(165,255,140,315,140,360)
-   .curveTo(140,405,165,450,250,450).curveTo(325,450,360,400,360,345).close()
-   // Bottom Hole
-   .moveTo(365,60).curveTo(360,-30,320,-145,240,-145).curveTo(160,-145,130,-60,130,35)
-   .curveTo(130,110,175,165,270,170).curveTo(335,165,365,110,365,60).close();
-  return p;
+  // Outer (CCW)
+  p.moveTo(475,490).lineTo(250,490).curveTo(130,490,65,420,65,255).curveTo(65,135,105,70,180,55)
+   .curveTo(130,35,85,-20,85,-80).curveTo(85,-160,150,-210,270,-210).curveTo(420,-210,470,-130,470,-60)
+   .lineTo(470,30).lineTo(390,30).lineTo(390,-60).curveTo(390,-110,355,-135,275,-135)
+   .curveTo(200,-135,170,-110,170,-80).curveTo(170,-25,250,5,415,30)
+   .lineTo(485,40).curveTo(495,135,490,340,490,370).lineTo(545,370).lineTo(545,450) // Ear
+   .lineTo(480,450).curveTo(485,470,480,490,475,490).close()
+   // Top Hole (CW)
+   .moveTo(300,415).curveTo(405,415,400,320,405,215).curveTo(380,185,260,90,165,125)
+   .curveTo(145,160,145,180,145,245).curveTo(145,385,215,415,300,415).close(); return p;
 })(new o.Path())});
