@@ -15,65 +15,38 @@
   <meta name="twitter:card" content="summary_large_image" />
 
   <style>
-    :root {
-      --bg: #f8f7f2;
-      --ink: #1a1a1a;
-      --accent: #a6a6a6;
-    }
+    :root { --bg: #f8f7f2; --ink: #1a1a1a; --accent: #a6a6a6; }
     @font-face { font-family: "Stain"; src: url("./dist/Stain.otf") format("opentype"); }
     * { box-sizing: border-box; }
-    body {
-      margin: 0; min-height: 100vh;
-      background: var(--bg); color: var(--ink);
-      font-family: "Stain", sans-serif;
-      overflow-x: hidden;
-      padding: 2rem;
-    }
+    body { margin: 0; min-height: 100vh; background: var(--bg); color: var(--ink); font-family: "Stain", sans-serif; overflow-x: hidden; padding: 2rem; }
+    
     /* Creative ink stains */
-    .stain-mark {
-      position: absolute; z-index: -1; pointer-events: none; opacity: 0.06;
-      background: #000; border-radius: 50%; filter: blur(30px);
-    }
+    .stain-mark { position: absolute; z-index: -1; pointer-events: none; opacity: 0.06; background: #000; border-radius: 50%; filter: blur(30px); }
     .s1 { top: -5%; left: -5%; width: 40vw; height: 40vw; }
     .s2 { bottom: -10%; right: -5%; width: 50vw; height: 50vw; }
     .s3 { top: 40%; left: 60%; width: 200px; height: 200px; filter: blur(60px); opacity: 0.08; }
     
-    .container {
-      max-width: 900px; margin: 0 auto;
-      min-height: 85vh; display: flex; flex-direction: column; justify-content: space-between;
-    }
-    header { 
-      text-align: center; 
-      border-bottom: 4px solid var(--ink); 
-      padding-bottom: 2rem; margin-bottom: 4rem;
-      border-radius: 0 0 50% 50% / 0 0 10px 10px; /* Ink bleed edge */
-    }
+    .container { max-width: 900px; margin: 0 auto; min-height: 85vh; display: flex; flex-direction: column; justify-content: space-between; }
+    header { text-align: center; border-bottom: 4px solid var(--ink); padding-bottom: 2rem; margin-bottom: 4rem; border-radius: 0 0 50% 50% / 0 0 10px 10px; }
     h1 { font-size: clamp(4rem, 15vw, 9rem); margin: 0; line-height: 0.8; text-transform: uppercase; }
     
-    /* Dictionary definition block */
     .def-block { margin-bottom: 4rem; }
     .word { font-size: clamp(3rem, 8vw, 5rem); margin: 0 0 1rem; display: block; }
     .pos { font-size: 1.5rem; color: var(--accent); display: block; margin-bottom: 1.5rem; font-style: italic; }
-    .meaning {
-      font-size: clamp(1.2rem, 3.5vw, 2rem); 
-      line-height: 1.2; 
-      margin-bottom: 1.5rem;
-      padding-left: 1.5rem;
-      border-left: 3px solid var(--accent);
-    }
+    .meaning { font-size: clamp(1.2rem, 3.5vw, 2rem); line-height: 1.2; margin-bottom: 1.5rem; padding-left: 1.5rem; border-left: 3px solid var(--accent); }
     
     .info { text-align: center; font-size: 1.1rem; color: var(--accent); margin: 3rem 0; text-transform: uppercase; letter-spacing: 0.05em; }
     
-    .download-area { text-align: center; margin-top: auto; }
-    .btn {
-      display: inline-block; padding: 1.5rem 3rem;
-      font-size: 2rem; color: var(--bg); background: var(--ink);
-      text-decoration: none; border-radius: 90% 40% 80% 30% / 40% 80% 50% 70%; /* organic blot shape */
-      transition: 0.2s ease;
-    }
+    .download-area { text-align: center; margin-top: auto; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+    .btn { display: inline-block; padding: 1.5rem 3rem; font-size: 2rem; color: var(--bg); background: var(--ink); text-decoration: none; border-radius: 90% 40% 80% 30% / 40% 80% 50% 70%; transition: 0.2s ease; }
     .btn:hover { transform: scale(1.05) rotate(-1deg); border-radius: 50% 90% 30% 80% / 90% 30% 70% 40%; }
-    .repo-link { display: block; margin-top: 2rem; color: var(--ink); text-decoration: none; font-size: 1rem; }
+    .repo-link { color: var(--ink); text-decoration: none; font-size: 1rem; }
     .repo-link:hover { text-decoration: underline; }
+
+    .usage { margin-top: 3rem; width: 100%; max-width: 600px; text-align: left; }
+    .usage pre { background: #e8e7e2; padding: 1.5rem; border-radius: 8px; overflow-x: auto; border: 2px dashed var(--accent); }
+    .usage code { font-family: monospace; font-size: 0.9rem; color: #444; }
+    .lbl { font-size: 0.9rem; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; display: block; }
   </style>
 </head>
 <body>
@@ -101,8 +74,18 @@
 
     <section class="download-area">
       <a href="https://github.com/multipleof4/stain.otf/releases/download/v1/Stain.otf" class="btn">Download Stain.OTF</a>
+      
+      <div class="usage">
+        <span class="lbl">Web Import (CDN)</span>
+        <pre><code>@font-face {
+  font-family: "Stain";
+  src: url("https://cdn.jsdelivr.net/gh/multipleof4/stain.otf@master/dist/Stain.otf") format("opentype");
+}</code></pre>
+      </div>
+
       <a href="https://github.com/multipleof4/stain.otf" class="repo-link">github.com / multipleof4 / stain.otf</a>
     </section>
   </div>
 </body>
 </html>
+
